@@ -29,7 +29,9 @@ async def main():
         
         page = await context.new_page()
         
-        url_actual = URL_INICIAL
+        # Así se hace la entrada dinámica limpia:
+        zona_input = input("¿Qué localidad/zona quieres buscar? (ej: madrid, barcelona, valencia): ").strip().lower().replace(" ", "-")
+        url_actual = f"https://www.pisos.com/alquiler/pisos-{zona_input}/"
         contador_paginas = 1
         lista_pisos = []  
         
@@ -59,31 +61,53 @@ async def main():
             print(f"[DEBUG] Contenedores de pisos detectados por BS4: {len(pisos)}")
             
             for piso in pisos:
-                elemento_subtitulo = piso.select_one(".ad-preview__subtitle")
+                # 1. TÍTULO Y UBICACIÓN
+                elemento_titulo = piso.select_one(".ad-preview__title")
+                elemento_ubi = piso.select_one(".ad-preview__subtitle")
                 
-                if elemento_subtitulo is None:
+                # CLÁUSULA DE GUARDA: Si no hay ni título ni ubicación, es publicidad
+                if not elemento_titulo and not elemento_ubi:
                     continue
-                    
-                titulo = elemento_subtitulo.text.strip()
                 
+                titulo = elemento_titulo.text.strip() if elemento_titulo else "Sin título"
+                ubicacion = elemento_ubi.text.strip() if elemento_ubi else "Sin ubicación"
+                
+                # 2. DESCRIPCIÓN
+                elemento_desc = piso.select_one(".ad-preview__description")
+                descripcion = elemento_desc.text.strip() if elemento_desc else "Sin descripción"
+                
+                # 3. PRECIO
                 try:
                     elemento_precio = piso.select_one(".ad-preview__price")
-                    if elemento_precio:
-                        precio = int(
-                            elemento_precio.text.strip()
-                            .replace("€", "")
-                            .replace(".", "")
-                            .replace("/mes", "")
-                            .strip()
-                        )
-                    else:
-                        precio = 0
+                    precio = int(elemento_precio.text.strip().replace("€", "").replace(".", "").replace("/mes", "").strip()) if elemento_precio else 0
                 except ValueError:
-                    print(f"  [!] Precio con formato desconocido para: {titulo}")
                     precio = 0
-                    
-                print(f"  -> Capturado: {titulo} | {precio}€")
-                lista_pisos.append({"titulo": titulo, "precio": precio})
+                
+                # 4. CARACTERÍSTICAS DINÁMICAS (m2, habs, baños)
+                caracteristicas = piso.select(".ad-preview__char")
+                m2, habs, banos = "0", "0", "0" # Valores por defecto
+                
+                for char in caracteristicas:
+                    texto = char.text.strip().lower()
+                    if "m²" in texto:
+                        m2 = texto.replace("m²", "").strip()
+                    elif "hab" in texto:
+                        habs = texto.replace("hab.", "").replace("habs.", "").strip()
+                    elif "baño" in texto:
+                        banos = texto.replace("baño", "").replace("baños", "").strip()
+
+                print(f"  -> Capturado: {titulo} | {ubicacion} | {precio}€ | {m2}m² | {habs} hab | {banos} ba")
+                
+                # 5. GUARDADO EN DICCIONARIO
+                lista_pisos.append({
+                    "titulo": titulo, 
+                    "ubicacion": ubicacion,
+                    "precio": precio,
+                    "m2": m2,
+                    "habitaciones": habs,
+                    "banos": banos,
+                    "descripcion": descripcion
+                })
             
             boton_siguiente = await page.query_selector("span:has-text('Siguiente')")
             
@@ -102,10 +126,12 @@ async def main():
     print("\nGuardando datos en CSV...")
     if lista_pisos:
         with open("resultados_pisos.csv", "w", newline="", encoding="utf-8") as archivo:
-            columnas = ["titulo", "precio"]
+            # Tienen que llamarse EXACTAMENTE igual que las claves de tu diccionario
+            columnas = ["titulo", "ubicacion", "precio", "m2", "habitaciones", "banos", "descripcion"]
             escritor = csv.DictWriter(archivo, fieldnames=columnas)
             escritor.writeheader()
             escritor.writerows(lista_pisos)
+
         print(f"¡PROCESO FINALIZADO! Total capturados y guardados: {len(lista_pisos)} pisos.")
     else:
         print("No se ha capturado ningún piso. El archivo CSV no se ha generado.")

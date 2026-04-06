@@ -1,91 +1,87 @@
-titulo,precio
-Prosperidad (Distrito Chamartín. Madrid Capital),1350
-Las Matas-Los Peñascales (Las Rozas de Madrid),4000
-Castellana (Distrito Barrio de Salamanca. Madrid Capital),2980
-El Viso (Distrito Chamartín. Madrid Capital),3900
-Almagro (Distrito Chamberí. Madrid Capital),1000
-Goya (Distrito Barrio de Salamanca. Madrid Capital),3000
-Somosaguas-Húmera-Los Ángeles (Pozuelo de Alarcón),3000
-Prado de Somosaguas (Pozuelo de Alarcón),3050
-Ciudad Universitaria (Distrito Moncloa-Aravaca. Madrid Capital),2200
-Embajadores-Lavapiés (Distrito Centro. Madrid Capital),1480
-Hispanoamérica (Distrito Chamartín. Madrid Capital),2500
-Almagro (Distrito Chamberí. Madrid Capital),3450
-Centro (Villaviciosa de Odón),2500
-Estrella (Distrito Retiro. Madrid Capital),1550
-Hispanoamérica (Distrito Chamartín. Madrid Capital),1500
-La Finca (Pozuelo de Alarcón),4600
-Argüelles (Distrito Moncloa-Aravaca. Madrid Capital),1200
-Cuatro Caminos (Distrito Tetuán. Madrid Capital),2300
-Castillejos (Distrito Tetuán. Madrid Capital),1650
-Pinar del Rey (Distrito Hortaleza. Madrid Capital),2100
-Centro (Móstoles),1000
-Zona Avenida de Europa (Pozuelo de Alarcón),1900
-Núcleo Urbano (Villanueva de la Cañada),950
-Castilla (Distrito Chamartín. Madrid Capital),1650
-Castillejos (Distrito Tetuán. Madrid Capital),3950
-Embajadores-Lavapiés (Distrito Centro. Madrid Capital),3000
-Zona Calle Casa Amarilla (Galapagar),1300
-Río Rosas (Distrito Chamberí. Madrid Capital),2570
-Prosperidad (Distrito Chamartín. Madrid Capital),3350
-Prosperidad (Distrito Chamartín. Madrid Capital),1200
-Prosperidad (Distrito Chamartín. Madrid Capital),1950
-Colina (Distrito Ciudad Lineal. Madrid Capital),1700
-Lista (Distrito Barrio de Salamanca. Madrid Capital),1900
-Lista (Distrito Barrio de Salamanca. Madrid Capital),2500
-Valdebebas-Valdefuentes (Distrito Hortaleza. Madrid Capital),2000
-Arapiles (Distrito Chamberí. Madrid Capital),2400
-Costillares (Distrito Ciudad Lineal. Madrid Capital),2000
-Ciudad Universitaria (Distrito Moncloa-Aravaca. Madrid Capital),1300
-Piovera (Distrito Hortaleza. Madrid Capital),1330
-Ventas (Distrito Ciudad Lineal. Madrid Capital),900
-Hispanoamérica (Distrito Chamartín. Madrid Capital),2100
-Embajadores-Lavapiés (Distrito Centro. Madrid Capital),1800
-Ibiza (Distrito Retiro. Madrid Capital),3900
-Sol (Distrito Centro. Madrid Capital),1200
-Cortes-Huertas (Distrito Centro. Madrid Capital),1600
-Embajadores-Lavapiés (Distrito Centro. Madrid Capital),1500
-Cuatro Caminos (Distrito Tetuán. Madrid Capital),2500
-Palos de Moguer (Distrito Arganzuela. Madrid Capital),2100
-Ibiza (Distrito Retiro. Madrid Capital),1450
-Virgen del Cortijo-Manoteras (Distrito Hortaleza. Madrid Capital),2750
-Parque de La Coruña-Las Suertes (Collado Villalba),880
-Abrantes (Distrito Carabanchel. Madrid Capital),1550
-Fuente del Berro (Distrito Barrio de Salamanca. Madrid Capital),1600
-Justicia-Chueca (Distrito Centro. Madrid Capital),4100
-Parque Empresarial (Las Rozas de Madrid),1147
-"Pryconsa, Juan de Austria (Distrito El Val. Alcalá de Henares)",850
-Almagro (Distrito Chamberí. Madrid Capital),2000
-Cuatro Caminos (Distrito Tetuán. Madrid Capital),2800
-Cuatro Caminos (Distrito Tetuán. Madrid Capital),1700
-Hispanoamérica (Distrito Chamartín. Madrid Capital),2500
-Quintana (Distrito Ciudad Lineal. Madrid Capital),1400
-Zona Sureste (Torrejón de Ardoz),1350
-Castillo-Campodón (Villaviciosa de Odón),1900
-Universidad-Malasaña (Distrito Centro. Madrid Capital),2375
-Somosaguas-Húmera-Los Ángeles (Pozuelo de Alarcón),4750
-Castellana (Distrito Barrio de Salamanca. Madrid Capital),4950
-Goya (Distrito Barrio de Salamanca. Madrid Capital),2400
-Bellas Vistas (Distrito Tetuán. Madrid Capital),2100
-Castillejos (Distrito Tetuán. Madrid Capital),2200
-Justicia-Chueca (Distrito Centro. Madrid Capital),1550
-Castellana (Distrito Barrio de Salamanca. Madrid Capital),2750
-Palacio (Distrito Centro. Madrid Capital),2200
-Ibiza (Distrito Retiro. Madrid Capital),1910
-El Pardo (Distrito Fuencarral-El Pardo. Madrid Capital),4700
-Justicia-Chueca (Distrito Centro. Madrid Capital),1650
-Universidad-Malasaña (Distrito Centro. Madrid Capital),1650
-Universidad-Malasaña (Distrito Centro. Madrid Capital),2700
-Palacio (Distrito Centro. Madrid Capital),2190
-Centro-Zona de la Estación (Tres Cantos),1200
-Bellas Vistas (Distrito Tetuán. Madrid Capital),1150
-Prosperidad (Distrito Chamartín. Madrid Capital),1080
-Guindalera (Distrito Barrio de Salamanca. Madrid Capital),1500
-Goya (Distrito Barrio de Salamanca. Madrid Capital),2600
-Río Rosas (Distrito Chamberí. Madrid Capital),4200
-Cuatro Caminos (Distrito Tetuán. Madrid Capital),1400
-Apóstol Santiago (Distrito Hortaleza. Madrid Capital),1795
-Pinar del Rey (Distrito Hortaleza. Madrid Capital),1700
-Hispanoamérica (Distrito Chamartín. Madrid Capital),1300
-Prosperidad (Distrito Chamartín. Madrid Capital),1700
-La Tenería I-La Tenería II (Pinto),1300
+titulo,ubicacion,precio,m2,habitaciones,banos,descripcion
+Piso en Travesía de Don Pedro,Villarrobledo,400,120,4,1,"Piso de alquiler en todo el centro , con 4 dormitorios y garaje tambien .amueblado y en muy buen estado ."
+Apartamento en calle Alcalde Conangla,La Milagrosa-La Estrella-San Antón (Albacete Capital),700,80,1,1,"Este encantador apartamento en alquiler se encuentra en la zona de eroski, en albacete capital. Situado en un 3º piso, cuenta con ..."
+Piso en Ensanche-Franciscanos,Fátima-Franciscanos (Albacete Capital),1000,95,4,2 s,"Inmobiliaria tejares alquila estupendo piso en zona francisco pizarro , "" solo a empresas para sus trabajadores  o  estudiantes"" l..."
+Apartamento en Centro,Centro-Villacerrada-Pajarita (Albacete Capital),950,100,2,2 s,"Meraki alquila apartamento a estrenar en el centro!
+ 
+ El piso dispone de 90 metros útiles distribuidos en un amplio salón-comedor..."
+Chalet en Villarrobledo,Villarrobledo,550,200,5,2 s,"Se alquila casa grande para los días del festival viña rock, ideal para grupos medianos o grandes. Está situada a solo 10 minutos ..."
+Chalet en Villarrobledo,Villarrobledo,400,100,3,2 s,"Te alquilo adosado super centrico y nuevo completamente con 3 dormitorios ,salon ,cocina y dos baños y un patio ven que te lo ense..."
+Ático en Villarrobledo,Villarrobledo,445,90,2,1,"Te alquilo atico con 2 dormitorios , salon , cocina y baño y lo mejor la terraza que puedes hacer hasta babacoa y tomar el sol . E..."
+Piso en Villarrobledo,Villarrobledo,400,90,3,2 s,"Piso muy nuevo en alquiler muy céntrico con 3 dormitorios, 2 baños, salón y cocina amplios, lavadero, cochera y calefacción de gas..."
+Chalet en Villarrobledo,Villarrobledo,550,400,9,2 s,"Si vienes al festival viñarock en villarrobledo y deseas la comodidad de alojarte en una vivienda, en esta casa de 400m² podeís al..."
+Piso en Villarrobledo,Villarrobledo,400,90,2,2 s,"Piso en alquiler situado en zona muy céntrica. Muy nuevo, con 2 dormitorios, 2 baños, calefacción individual de gas por suelo radi..."
+Piso en Villarrobledo,Villarrobledo,500,140,4,1,"Piso céntrico en alquiler en villarrobledo en la calle plaza santa maria 13, dispone de 140 metros de superficie, 4 dormitorios, b..."
+Apartamento en Ensanche-Franciscanos,Fátima-Franciscanos (Albacete Capital),850,80,2,1,"Inmobiliaria tejares aquila piso en zona arquitecto vandelvira ,  piso disponible para entrar en julio de 2026. La vivienda es una..."
+Piso en Avenida de España,Hospital-Parque Sur (Albacete Capital),850,83,2,1,"Inmobiliaria tejares alquila piso reformado para estudiantes o trabajadores en una de las zona más demandadas de la ciudad
+Luminos..."
+Apartamento en Placeta Don Carlos,Villarrobledo,500,45,2,1,"Se alquila apartamento a estrenar amueblado en planta baja. Salón con cocina incorporada, 2 dormitorios, baño y pequeño patio. A/a..."
+Piso en Ensanche-Franciscanos,Fátima-Franciscanos (Albacete Capital),1000,95,4,2 s,"Inmobiliaria tejares alquila estupendo piso en zona francisco pizarro , "" solo a empresas para sus trabajadores  o  estudiantes"" l..."
+Apartamento en Carrefour,Vereda-Santa Teresa-Pedro Lamata-San Pedro Mortero (Albacete Capital),900,95,3,2 s,"Inmobiliaria tejares alquila piso  solo  para  estudiantes , en las fechas de septiembre a julio. La vivienda consta de tres habit..."
+Piso en Hellín,Hellín,550,100,2,2 s,¡Descubre tu nuevo hogar en este encantador piso de alquiler en la tercera planta con ascensor! Este espacioso apartamento cuenta ...
+Piso en Hellín,Hellín,500,60,0,1,"¡Descubre este espectacular apartamento en alquiler que combina modernidad y comodidad! Este luminoso estudio, completamente nuevo..."
+Ático en Centro,Centro-Villacerrada-Pajarita (Albacete Capital),950,81,2,1,"Meraki alquila ático en el centro!
+ 
+ El ático dispone de 78 metros distribuidos en un amplio salón-comedor-cocina muy luminoso co..."
+Piso en Avenida de España,Centro-Villacerrada-Pajarita (Albacete Capital),1100,85,3,2 s,"Best house alquila piso para estudiantes en albacete zona avenida de españa de 85 m² todo exterior, muy luminoso. Cuenta con tres ..."
+Piso en Villarrobledo,Villarrobledo,450,120,3,2 s,"Se alquila piso en villarrobledo en la calle colon en muy buen estado, en una buena zona. Tiene 120 m de superficie y cuenta con 3..."
+Piso en calle de la Cruz de Piedra,Villarrobledo,300,70,1,1,"Piso en alquiler en el centro con un dormitorio, salón con cocina americana y un baño por solo 300€."
+Apartamento en calle de Jorge Juan,Hospital-Parque Sur (Albacete Capital),750,85,2,1,"Acogedor apartamento en alquiler en albacete, en la zona del hospital. Con 2 dormitorios amplios, 1 baño completo y una cocina ind..."
+Piso en calle de Mendizábal,Almansa,300,138,4,2 s,"Disponible a partir de febrero. Reserva ya !!
+Habitaciones en alquiler desde 8m² a 17m²
+Y precio desde 250€ hasta 350€ / mes
+Gasto..."
+Chalet en calle del Jazmín,Albacete Capital,1800,236,5,3 s,"Exclusivo chalet en alquiler en urbanización aguasol ? Albacete
+
+Vivir en aguasol es sinónimo de tranquilidad, seguridad y calidad..."
+Piso en calle de Quevedo,El Pilar-San Pablo (Albacete Capital),800,115,3,2 s,"Grupo la noria alquila piso amueblado con ascensor y trastero incluido en precio. 
+Consta de 3 dormitorios, 2 baños (1 de ellos en..."
+Chalet en calle del Paraje de Fuentecicas,Almansa,1000,140,3,1,"Disponible a partir de octubre. Precio de octubre a mayo  1.100€ de junio a sept. 1500€
+Descubre este encantador chalet ubicado en..."
+Piso en calle Granada,El Pilar-San Pablo (Albacete Capital),1100,110,3,3 s,"Este hermoso piso en alquiler en albacete, el pilar, es la opción perfecta para aquellos que buscan comodidad y estilo. Con 3 dorm..."
+Piso en calle Granada,El Pilar-San Pablo (Albacete Capital),1100,110,3,3 s,"Este hermoso piso en alquiler en albacete, el pilar, es la opción perfecta para aquellos que buscan comodidad y estilo. Con 3 dorm..."
+Piso en calle Nueva,Carretas (Albacete Capital),950,68,2,1,"Atico, terraza 15 mts, nuevo, inmobiliaria gomez torres, alquila este estupendo ático amueblado en el centro de albacete, con todo..."
+Apartamento en calle Gaona,Carretas (Albacete Capital),850,82,2,1,"Se alquila apartamento en zona centro, coqueto y acogedor: api luna ab
+
+El apartamento esta situado en todo el corazón de la ciuda..."
+Piso en Vereda-Santa Teresa-Pedro Lamata-San Pedro Mortero,Vereda-Santa Teresa-Pedro Lamata-San Pedro Mortero (Albacete Capital),800,93,3,2 s,"""solo se atenderán solicitudes que aporten por escrito su perfil"". Ponemos en alquiler vivienda ubicada justo al lado del centro c..."
+Apartamento en Hospital-Parque Sur,Hospital-Parque Sur (Albacete Capital),750,75,2,1,Se alquila apartamento totalmente amueblado seminuevo muy cerca del hospital general ideal para parejas o trabajadores consta de d...
+Piso en Hospital-Parque Sur,Hospital-Parque Sur (Albacete Capital),800,80,2,1,Servicios inmobiliarios carretero carcelén les ofrece apartamento en alquiler en avenida de españa. Apartamento totalmente reforma...
+Apartamento en Carrefour,Vereda-Santa Teresa-Pedro Lamata-San Pedro Mortero (Albacete Capital),900,95,3,2 s,"Inmobiliaria tejares alquila piso  solo  para  estudiantes , en las fechas de septiembre a julio. La vivienda consta de tres habit..."
+Piso en Feria,Feria (Albacete Capital),850,129,3,2 s,*850/mes* inmobiliaria la mancha alquila piso en zona circunvalación-feria de albacete&lt;/br&gt;&lt;/br&gt;vivienda situada en fr...
+Piso en Castilla La Mancha,Almansa,450,48,1,1,"Presentamos este atractivo piso en alquiler ubicado en la encantadora ciudad de almansa, dentro de la comunidad autónoma de castil..."
+Piso en Feria,Feria (Albacete Capital),800,95,3,2 s,"Se alquila piso amueblado en una zona inmejorable, en calle baños. La vivienda es semi-nueva, del año 2003, y tiene tres dormitori..."
+Piso en calle de la Puerta de Murcia,Carretas (Albacete Capital),700,90,3,1,Sin descripción
+Chalet en Agua Sol,Pedanías y Barrios Rurales (Albacete Capital),1800,236,5,3 s,"🏡 inmohouse servicios inmobiliarios, con referencia f152, pone en alquiler este imponente chalet con piscina propia y amplias zon..."
+Piso en Avenida de España,Hospital-Parque Sur (Albacete Capital),800,84,2,1,"Piso en albacete zona avenida de españa, 84.00 m. De superficie, 2 habitaciones dobles,  un baño, propiedad para :entrar a vivir, ..."
+Chalet en Albacete Capital,Albacete Capital,1800,230,5,3 s,"Hermoso chalet en alquiler en albacete, aguasol, con amplios espacios y excelentes comodidades. Esta propiedad cuenta con 5 dormit..."
+Apartamento en Carrefour,Vereda-Santa Teresa-Pedro Lamata-San Pedro Mortero (Albacete Capital),900,95,3,2 s,"Inmobiliaria tejares alquila piso  solo  para  estudiantes , en las fechas de septiembre a julio. La vivienda consta de tres habit..."
+Casa adosada en Facultad de Medicina,Pedanías y Barrios Rurales (Albacete Capital),1300,250,4,3 s,"Inmohouse alquila ref a180. Descubre este exclusivo adosado en alquiler situado en la prestigiosa zona de la facultad de medicina,..."
+Apartamento en Avenida de España,Carretas (Albacete Capital),850,91,2,1,"Se alquila coqueto piso de 2 dormt. Junto a la avenida españa, recién pintado y muebles a estrenar
+Este encantador apartamento de ..."
+Piso en Vereda-Santa Teresa-Pedro Lamata-San Pedro Mortero,Vereda-Santa Teresa-Pedro Lamata-San Pedro Mortero (Albacete Capital),800,115,3,2 s,*800/mes* inmobiliaria la mancha alquila piso en pedro la mata-albacete formado por:&lt;/br&gt;&lt;/br&gt;- cocina equipada con mu...
+Piso en Villacerrada,Fátima-Franciscanos (Albacete Capital),900,95,3,2 s,"No se aceptan mascotas, se hace seguro de impagos.
+¡No dejes pasar esta oportunidad de alquilar este increíble piso en albacete, e..."
+Piso en Carretas,Carretas (Albacete Capital),850,125,3,2 s,"Se alquila espectacular piso seminuevo, del año 2007, al lado de la biblioteca del depósito del sol. Por su situacion, ideal para ..."
+Piso en Centro-Rosario,Centro-Villacerrada-Pajarita (Albacete Capital),1200,133,4,2 s,"En alquiler vivienda en zona  centro-rosario específicamente para estudiantes o trabajadores.
+
+Del año de construcción de 1975, ti..."
+Piso en Ensanche-Circunvalacion,Fátima-Franciscanos (Albacete Capital),240,104,4,2 s,Para personas responsables y con ingresos demostrables!! Se alquilan habitaciones en un piso reformado de 4 dormt. Y 2 baños. Junt...
+Casa adosada en Facultad de Medicina,Albacete Capital,1650,276,4,3 s,"Adosada en albacete zona facultad de medicina, 276 m. De superficie, 80 m² de terraza, 4 habitaciones dobles, 3 baños, propiedad p..."
+Piso en El Pilar-San Pablo,El Pilar-San Pablo (Albacete Capital),800,98,3,2 s,Alquiler de piso amueblado en el barrio del pilar. Es un edificio con pocos años. El ascensor es accesible. La vivienda está bien ...
+Casa en Pedanías y Barrios Rurales,Pedanías y Barrios Rurales (Albacete Capital),1800,236,5,3 s,*1.800* inmobiliaria la mancha alquila parcela de lujo a estrenar en urbanización aguasol a tan sólo 10 minutos de albacete.&lt;/b...
+Chalet en Aguasol,Pedanías y Barrios Rurales (Albacete Capital),2200,0,5,3 s,"Grain alquila
+Ref: 17719
+
+Chalet en alquiler con 200 m² útiles de vivienda sobre una parcela de más de 2.000 m², completamente ref..."
+Piso en Centro-Villacerrada-Pajarita,Centro-Villacerrada-Pajarita (Albacete Capital),750,100,3,2 s,"Bonito piso en alquiler. Se encuentra ubicado cerca de la feria y el centro. El edificio tiene ascensor accesible, sin escalones. ..."
+Piso en Parque Sur,Fátima-Franciscanos (Albacete Capital),600,112,4,1,"Best house alquila  piso para estudiantes. Vivienda amplia en cuarta planta sin ascensor , 100 m² útiles, 4 dormitorios, baño con ..."
+Piso en Feria,Feria (Albacete Capital),350,100,3,1,"Presentamos un magnífico piso en alquiler para compartir, idealmente ubicado en la zona de feria, albacete. Con una superficie con..."
+Piso en El Pilar,El Pilar-San Pablo (Albacete Capital),1100,110,3,3 s,"Este hermoso piso en alquiler en albacete, el pilar, es la opción perfecta para aquellos que buscan comodidad y estilo. Con 3 dorm..."
+Piso en Centro,Centro-Villacerrada-Pajarita (Albacete Capital),950,102,3,2 s,"Grain alquila
+Ref: 17701
+
+Acogedor piso con plaza de garaje y trastero en alquiler en el corazón de albacete.
+
+Cuenta con salón, u..."
+Piso en Feria,Feria (Albacete Capital),1400,90,3,2 s,"Graciano inmobiliaria alquila piso totalmente reformado en paseo la libertad, altozano. La vivienda está distribuida salón con bal..."
