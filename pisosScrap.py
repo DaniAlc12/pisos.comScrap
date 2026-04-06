@@ -9,8 +9,11 @@ import sys
 URL_INICIAL = "https://www.pisos.com/alquiler/pisos-madrid/"
 DOMINIO_BASE = "https://www.pisos.com"
 
+
 async def main():
-    limite_input = input("¿Cuántas páginas quieres scrapear? (Escribe 0 para no poner límite): ")
+    limite_input = input(
+        "¿Cuántas páginas quieres scrapear? (Escribe 0 para no poner límite): "
+    )
     try:
         limite_paginas = int(limite_input)
     except ValueError:
@@ -18,37 +21,46 @@ async def main():
         sys.exit(1)
 
     async with async_playwright() as p:
-        
+
         browser = await p.chromium.launch(headless=True)
-        
+
         context = await browser.new_context(
             user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
             viewport={"width": 1920, "height": 1080},
-            locale="es-ES"
+            locale="es-ES",
         )
-        
+
         page = await context.new_page()
-        
+
         # Así se hace la entrada dinámica limpia:
-        zona_input = input("¿Qué localidad/zona quieres buscar? (ej: madrid, barcelona, valencia): ").strip().lower().replace(" ", "-")
+        zona_input = (
+            input(
+                "¿Qué localidad/zona quieres buscar? (ej: madrid, barcelona, valencia): "
+            )
+            .strip()
+            .lower()
+            .replace(" ", "-")
+        )
         url_actual = f"https://www.pisos.com/alquiler/pisos-{zona_input}/"
         contador_paginas = 1
-        lista_pisos = []  
-        
+        lista_pisos = []
+
         while True:
             if limite_paginas > 0 and contador_paginas > limite_paginas:
-                print(f"\n[INFO] Límite de {limite_paginas} páginas alcanzado. Finalizando navegación.")
+                print(
+                    f"\n[INFO] Límite de {limite_paginas} páginas alcanzado. Finalizando navegación."
+                )
                 break
 
             print(f"\n--- Scrapeando página {contador_paginas} ---")
             print(f"URL: {url_actual}")
-            
+
             await page.goto(url_actual)
-            
+
             try:
                 await page.click("button:has-text('Aceptar y cerrar')", timeout=3000)
                 print("Banner de cookies cerrado.")
-                await asyncio.sleep(1) 
+                await asyncio.sleep(1)
             except Exception:
                 pass
 
@@ -56,37 +68,53 @@ async def main():
             print("Extrayendo datos de la página...")
             contenido_html = await page.content()
             soup = BeautifulSoup(contenido_html, "html.parser")
-            
+
             pisos = soup.select(".ad-preview__info")
             print(f"[DEBUG] Contenedores de pisos detectados por BS4: {len(pisos)}")
-            
+
             for piso in pisos:
                 # 1. TÍTULO Y UBICACIÓN
                 elemento_titulo = piso.select_one(".ad-preview__title")
                 elemento_ubi = piso.select_one(".ad-preview__subtitle")
-                
+
                 # CLÁUSULA DE GUARDA: Si no hay ni título ni ubicación, es publicidad
                 if not elemento_titulo and not elemento_ubi:
                     continue
-                
-                titulo = elemento_titulo.text.strip() if elemento_titulo else "Sin título"
-                ubicacion = elemento_ubi.text.strip() if elemento_ubi else "Sin ubicación"
-                
+
+                titulo = (
+                    elemento_titulo.text.strip() if elemento_titulo else "Sin título"
+                )
+                ubicacion = (
+                    elemento_ubi.text.strip() if elemento_ubi else "Sin ubicación"
+                )
+
                 # 2. DESCRIPCIÓN
                 elemento_desc = piso.select_one(".ad-preview__description")
-                descripcion = elemento_desc.text.strip() if elemento_desc else "Sin descripción"
-                
+                descripcion = (
+                    elemento_desc.text.strip() if elemento_desc else "Sin descripción"
+                )
+
                 # 3. PRECIO
                 try:
                     elemento_precio = piso.select_one(".ad-preview__price")
-                    precio = int(elemento_precio.text.strip().replace("€", "").replace(".", "").replace("/mes", "").strip()) if elemento_precio else 0
+                    precio = (
+                        int(
+                            elemento_precio.text.strip()
+                            .replace("€", "")
+                            .replace(".", "")
+                            .replace("/mes", "")
+                            .strip()
+                        )
+                        if elemento_precio
+                        else 0
+                    )
                 except ValueError:
                     precio = 0
-                
+
                 # 4. CARACTERÍSTICAS DINÁMICAS (m2, habs, baños)
                 caracteristicas = piso.select(".ad-preview__char")
-                m2, habs, banos = "0", "0", "0" # Valores por defecto
-                
+                m2, habs, banos = "0", "0", "0"  # Valores por defecto
+
                 for char in caracteristicas:
                     texto = char.text.strip().lower()
                     if "m²" in texto:
@@ -96,28 +124,34 @@ async def main():
                     elif "baño" in texto:
                         banos = texto.replace("baño", "").replace("baños", "").strip()
 
-                print(f"  -> Capturado: {titulo} | {ubicacion} | {precio}€ | {m2}m² | {habs} hab | {banos} ba")
-                
+                print(
+                    f"  -> Capturado: {titulo} | {ubicacion} | {precio}€ | {m2}m² | {habs} hab | {banos} ba"
+                )
+
                 # 5. GUARDADO EN DICCIONARIO
-                lista_pisos.append({
-                    "titulo": titulo, 
-                    "ubicacion": ubicacion,
-                    "precio": precio,
-                    "m2": m2,
-                    "habitaciones": habs,
-                    "banos": banos,
-                    "descripcion": descripcion
-                })
-            
+                lista_pisos.append(
+                    {
+                        "titulo": titulo,
+                        "ubicacion": ubicacion,
+                        "precio": precio,
+                        "m2": m2,
+                        "habitaciones": habs,
+                        "banos": banos,
+                        "descripcion": descripcion,
+                    }
+                )
+
             boton_siguiente = await page.query_selector("span:has-text('Siguiente')")
-            
+
             if boton_siguiente is None:
                 print("No hay botón de Siguiente. Fin de la extracción.")
                 break
             else:
-                href_extraido = await boton_siguiente.evaluate("nodo => nodo.parentElement.getAttribute('href')")
+                href_extraido = await boton_siguiente.evaluate(
+                    "nodo => nodo.parentElement.getAttribute('href')"
+                )
                 url_actual = urljoin(DOMINIO_BASE, href_extraido)
-            
+
             await asyncio.sleep(random.uniform(2, 4))
             contador_paginas += 1
 
@@ -127,12 +161,22 @@ async def main():
     if lista_pisos:
         with open("resultados_pisos.csv", "w", newline="", encoding="utf-8") as archivo:
             # Tienen que llamarse EXACTAMENTE igual que las claves de tu diccionario
-            columnas = ["titulo", "ubicacion", "precio", "m2", "habitaciones", "banos", "descripcion"]
+            columnas = [
+                "titulo",
+                "ubicacion",
+                "precio",
+                "m2",
+                "habitaciones",
+                "banos",
+                "descripcion",
+            ]
             escritor = csv.DictWriter(archivo, fieldnames=columnas)
             escritor.writeheader()
             escritor.writerows(lista_pisos)
 
-        print(f"¡PROCESO FINALIZADO! Total capturados y guardados: {len(lista_pisos)} pisos.")
+        print(
+            f"¡PROCESO FINALIZADO! Total capturados y guardados: {len(lista_pisos)} pisos."
+        )
     else:
         print("No se ha capturado ningún piso. El archivo CSV no se ha generado.")
 
