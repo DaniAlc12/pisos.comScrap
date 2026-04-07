@@ -3,8 +3,9 @@ from urllib.parse import urljoin
 from playwright.async_api import async_playwright
 from bs4 import BeautifulSoup
 import random
-import csv
 import sys
+import sqlite3
+import re
 
 URL_INICIAL = "https://www.pisos.com/alquiler/pisos-madrid/"
 DOMINIO_BASE = "https://www.pisos.com"
@@ -32,7 +33,7 @@ async def main():
 
         page = await context.new_page()
 
-        # Así se hace la entrada dinámica limpia:
+        #Así se hace la entrada dinámica limpia:
         zona_input = (
             input(
                 "¿Qué localidad/zona quieres buscar? (ej: madrid, barcelona, valencia): "
@@ -73,11 +74,11 @@ async def main():
             print(f"[DEBUG] Contenedores de pisos detectados por BS4: {len(pisos)}")
 
             for piso in pisos:
-                # 1. TÍTULO Y UBICACIÓN
+                # 1.TÍTULO Y UBICACIÓN
                 elemento_titulo = piso.select_one(".ad-preview__title")
                 elemento_ubi = piso.select_one(".ad-preview__subtitle")
 
-                # CLÁUSULA DE GUARDA: Si no hay ni título ni ubicación, es publicidad
+                #CLÁUSULA DE GUARDA: Si no hay ni título ni ubicación, es publicidad
                 if not elemento_titulo and not elemento_ubi:
                     continue
 
@@ -88,13 +89,13 @@ async def main():
                     elemento_ubi.text.strip() if elemento_ubi else "Sin ubicación"
                 )
 
-                # 2. DESCRIPCIÓN
+                # 2.DESCRIPCIÓN
                 elemento_desc = piso.select_one(".ad-preview__description")
                 descripcion = (
                     elemento_desc.text.strip() if elemento_desc else "Sin descripción"
                 )
 
-                # 3. PRECIO
+                # 3.PRECIO
                 try:
                     elemento_precio = piso.select_one(".ad-preview__price")
                     precio = (
@@ -111,24 +112,30 @@ async def main():
                 except ValueError:
                     precio = 0
 
-                # 4. CARACTERÍSTICAS DINÁMICAS (m2, habs, baños)
+                # 4.CARACTERÍSTICAS DINÁMICAS (m2, habs, baños)
                 caracteristicas = piso.select(".ad-preview__char")
-                m2, habs, banos = "0", "0", "0"  # Valores por defecto
-
+                m2, habs, banos = "0", "0", "0" 
+                
                 for char in caracteristicas:
                     texto = char.text.strip().lower()
-                    if "m²" in texto:
-                        m2 = texto.replace("m²", "").strip()
+                    
+                    solo_numeros = re.sub(r"\D", "", texto)
+                    
+                    if not solo_numeros:
+                        solo_numeros = "0"
+                        
+                    if "m²" in texto or "metros" in texto:
+                        m2 = solo_numeros
                     elif "hab" in texto:
-                        habs = texto.replace("hab.", "").replace("habs.", "").strip()
-                    elif "baño" in texto:
-                        banos = texto.replace("baño", "").replace("baños", "").strip()
+                        habs = solo_numeros
+                    elif "baño" in texto or "aseo" in texto: 
+                        banos = solo_numeros
 
                 print(
                     f"  -> Capturado: {titulo} | {ubicacion} | {precio}€ | {m2}m² | {habs} hab | {banos} ba"
                 )
 
-                # 5. GUARDADO EN DICCIONARIO
+                # 5.GUARDADO EN DICCIONARIO
                 lista_pisos.append(
                     {
                         "titulo": titulo,
@@ -157,28 +164,45 @@ async def main():
 
         await browser.close()
 
-    print("\nGuardando datos en CSV...")
+    # 3.GUARDADO EN BASE DE DATOS SQLITE
+    print("\nGuardando datos en SQLite...")
     if lista_pisos:
-        with open("resultados_pisos_" + zona_input + ".csv", "w", newline="", encoding="utf-8") as archivo:
-            # Tienen que llamarse EXACTAMENTE igual que las claves de tu diccionario
-            columnas = [
-                "titulo",
-                "ubicacion",
-                "precio",
-                "m2",
-                "habitaciones",
-                "banos",
-                "descripcion",
-            ]
-            escritor = csv.DictWriter(archivo, fieldnames=columnas)
-            escritor.writeheader()
-            escritor.writerows(lista_pisos)
+        conexion = sqlite3.connect("inmobiliaria.db")
+        cursor = conexion.cursor()
 
-        print(
-            f"¡PROCESO FINALIZADO! Total capturados y guardados: {len(lista_pisos)} pisos."
-        )
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS pisos (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                titulo TEXT,
+                ubicacion TEXT,
+                precio INTEGER,
+                m2 INTEGER,
+                habitaciones INTEGER,
+                banos INTEGER,
+                descripcion TEXT
+            )
+        ''')
+
+        for piso in lista_pisos:
+            cursor.execute('''
+                INSERT INTO pisos (titulo, ubicacion, precio, m2, habitaciones, banos, descripcion)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+            ''', (
+                piso["titulo"], 
+                piso["ubicacion"], 
+                piso["precio"], 
+                int(piso["m2"]), 
+                int(piso["habitaciones"]), 
+                int(piso["banos"]), 
+                piso["descripcion"]
+            ))
+
+        conexion.commit()
+        conexion.close()
+
+        print(f"¡PROCESO FINALIZADO! Total guardados en BD: {len(lista_pisos)} pisos.")
     else:
-        print("No se ha capturado ningún piso. El archivo CSV no se ha generado.")
+        print("No se ha capturado ningún piso. La base de datos no se ha alterado.")
 
 
 if __name__ == "__main__":

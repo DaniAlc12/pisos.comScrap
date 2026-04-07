@@ -1,2 +1,5 @@
-venv
-resultados_pisos.csv
+*.db
+*.csv
+venv/
+__pycache__/
+.playwright/
