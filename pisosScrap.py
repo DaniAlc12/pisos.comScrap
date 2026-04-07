@@ -74,20 +74,23 @@ async def main():
             print(f"[DEBUG] Contenedores de pisos detectados por BS4: {len(pisos)}")
 
             for piso in pisos:
-                # 1.TÍTULO Y UBICACIÓN
+                # 1. TÍTULO, UBICACIÓN Y ENLACE (Todo unido)
                 elemento_titulo = piso.select_one(".ad-preview__title")
                 elemento_ubi = piso.select_one(".ad-preview__subtitle")
-
-                #CLÁUSULA DE GUARDA: Si no hay ni título ni ubicación, es publicidad
-                if not elemento_titulo and not elemento_ubi:
+                
+                # CLÁUSULA DE GUARDA estricta: Si no hay título, no hay enlace. Saltamos.
+                if not elemento_titulo:
                     continue
-
-                titulo = (
-                    elemento_titulo.text.strip() if elemento_titulo else "Sin título"
-                )
-                ubicacion = (
-                    elemento_ubi.text.strip() if elemento_ubi else "Sin ubicación"
-                )
+                
+                titulo = elemento_titulo.text.strip()
+                ubicacion = elemento_ubi.text.strip() if elemento_ubi else "Sin ubicación"
+                
+                # Extraemos el atributo 'href' directamente del título
+                ruta_enlace = elemento_titulo.get("href")
+                if ruta_enlace:
+                    enlace = urljoin(DOMINIO_BASE, ruta_enlace)
+                else:
+                    continue
 
                 # 2.DESCRIPCIÓN
                 elemento_desc = piso.select_one(".ad-preview__description")
@@ -136,17 +139,16 @@ async def main():
                 )
 
                 # 5.GUARDADO EN DICCIONARIO
-                lista_pisos.append(
-                    {
-                        "titulo": titulo,
-                        "ubicacion": ubicacion,
-                        "precio": precio,
-                        "m2": m2,
-                        "habitaciones": habs,
-                        "banos": banos,
-                        "descripcion": descripcion,
-                    }
-                )
+                lista_pisos.append({
+                    "enlace": enlace,    # <--- Esta es la pieza que faltaba en tu diccionario
+                    "titulo": titulo, 
+                    "ubicacion": ubicacion,
+                    "precio": precio,
+                    "m2": m2,
+                    "habitaciones": habs,
+                    "banos": banos,
+                    "descripcion": descripcion
+                })
 
             boton_siguiente = await page.query_selector("span:has-text('Siguiente')")
 
@@ -173,6 +175,7 @@ async def main():
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS pisos (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
+                enlace TEXT UNIQUE, -- El verdadero candado de titanio
                 titulo TEXT,
                 ubicacion TEXT,
                 precio INTEGER,
@@ -185,9 +188,10 @@ async def main():
 
         for piso in lista_pisos:
             cursor.execute('''
-                INSERT INTO pisos (titulo, ubicacion, precio, m2, habitaciones, banos, descripcion)
-                VALUES (?, ?, ?, ?, ?, ?, ?)
+                INSERT OR IGNORE INTO pisos (enlace, titulo, ubicacion, precio, m2, habitaciones, banos, descripcion)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
             ''', (
+                piso["enlace"],
                 piso["titulo"], 
                 piso["ubicacion"], 
                 piso["precio"], 
