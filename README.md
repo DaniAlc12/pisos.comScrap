@@ -61,9 +61,10 @@ Límite de páginas: Un número entero (ej. 3). Introduce 0 si quieres extraer t
 Zona de búsqueda: El nombre de la localidad (ej. madrid, valencia, sevilla). El script generará la URL correspondiente automáticamente.
 
 Estructura de los Datos Extraídos
-El archivo resultados_pisos.csv generado contiene las siguientes columnas:
+El archivo inmobiliaria.db generado contiene las siguientes columnas:
 
 Columna	Descripción
+url Enlace de la vivienda
 titulo	Título del anuncio publicado en la web.
 ubicacion	Zona, barrio o calle específica del inmueble.
 precio	Valor numérico mensual (limpio de símbolos € o puntos).
@@ -71,9 +72,12 @@ m2	Superficie en metros cuadrados.
 habitaciones	Número de dormitorios.
 banos	Número de cuartos de baño.
 descripcion	Fragmento del texto descriptivo del anuncio.
+datetime fecha en la que se lanzó el script
 
-⚠️ Aviso Legal e Importante (Warning)
+#####
+Aviso Legal e Importante (Warning)
 Este proyecto tiene fines estrictamente educativos.
+#####
 
 Ética de Scraping: No utilices este script para realizar peticiones masivas que puedan degradar el rendimiento del servicio de pisos.com.
 
@@ -83,4 +87,4 @@ Uso de Datos: Los datos obtenidos son para uso personal/investigación. No los u
 
 Responsabilidad: El autor no se hace responsable del uso indebido de esta herramienta ni de posibles bloqueos de IP por parte del servidor.
 
-Desarrollado con ❤️ para la comunidad de Python.
+Desarrollado para la comunidad de Python.
