@@ -159,7 +159,7 @@ async def main():
 
     print("\nGuardando datos en CSV...")
     if lista_pisos:
-        with open("resultados_pisos.csv", "w", newline="", encoding="utf-8") as archivo:
+        with open("resultados_pisos_" + zona_input + ".csv", "w", newline="", encoding="utf-8") as archivo:
             # Tienen que llamarse EXACTAMENTE igual que las claves de tu diccionario
             columnas = [
                 "titulo",
